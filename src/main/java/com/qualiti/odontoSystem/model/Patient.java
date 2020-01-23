@@ -15,10 +15,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.br.qualiti.bank.model.Account;
-
-
-
 @Entity
 public class Patient {
 	@Id
