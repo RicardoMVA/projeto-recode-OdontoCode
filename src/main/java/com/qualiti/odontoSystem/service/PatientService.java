@@ -48,6 +48,11 @@ public class PatientService {
 		
 	}
 	
-
-	
+	public void delete(long id) {
+		try {
+			patientRepository.deleteById(id);
+		}catch (EmptyResultDataAccessException e) {
+		}
+		
+	}	
 }
