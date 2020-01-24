@@ -36,6 +36,9 @@ public class PatientService {
 		if (currentPatient.isPresent()) {
 			currentPatient.get().setName(patient.getName());
 			currentPatient.get().setCPF(patient.getCPF());
+			currentPatient.get().setPhone(patient.getPhone());
+			currentPatient.get().setBirthday(patient.getBirthday());
+			currentPatient.get().setGender(patient.getGender());
 			if (patient.getAppointments() != null) {
 				currentPatient.get().getAppointments().addAll(patient.getAppointments());
 			}
