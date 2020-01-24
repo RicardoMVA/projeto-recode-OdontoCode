@@ -26,24 +26,21 @@ public class Patient {
 
 	@Column(length = 11, nullable = false, unique = true)
 	private String CPF;
-	
+
 	@Column(length = 11, nullable = false, unique = true)
 	private String phone;
-	
+
 	@Temporal(TemporalType.DATE)
-    private Calendar birthday;
-	
+	private Calendar birthday;
+
 	@Enumerated
 	public Gender gender;
 
 	public static enum Gender {
-		MALE,
-		FEMALE
+		MALE, FEMALE
 	}
-	
-	@OneToMany(cascade = CascadeType.ALL, 
-			fetch = FetchType.EAGER,
-			mappedBy = "patient")
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "patient")
 	private List<Appointment> appointments;
 
 	public Patient() {
@@ -96,7 +93,7 @@ public class Patient {
 	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
-	
+
 	public List<Appointment> getAppointments() {
 		return appointments;
 	}

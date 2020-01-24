@@ -22,45 +22,45 @@ import com.qualiti.odontoSystem.service.PatientService;
 public class PatientController {
 
 	private PatientService patientService;
+
 	PatientController(PatientService patientService) {
 		this.patientService = patientService;
 	}
-	
+
 	@GetMapping
 	public List findAll() {
 		return patientService.findAll();
 	}
-	
+
 	@GetMapping(path = { "/{id}" })
 	public ResponseEntity findById(@PathVariable long id) {
 		Optional<Patient> patient = patientService.findById(id);
-		if(patient.isPresent()) {
+		if (patient.isPresent()) {
 			return ResponseEntity.ok().body(patient);
-		}else
-		{
+		} else {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
+
 	@PostMapping
 	public Patient create(@RequestBody Patient patient) {
 		return patientService.create(patient);
 	}
-	
-	@PutMapping(value="/{id}")
+
+	@PutMapping(value = "/{id}")
 	public ResponseEntity update(@PathVariable("id") long id, @RequestBody Patient patient) {
 		Patient updatedPatient = patientService.update(id, patient);
 		if (updatedPatient == null) {
-			return ResponseEntity.notFound().build();			
+			return ResponseEntity.notFound().build();
 		} else {
 			return ResponseEntity.ok().body(updatedPatient);
 		}
 	}
-	
-	@DeleteMapping(path ={"/{id}"})
+
+	@DeleteMapping(path = { "/{id}" })
 	public ResponseEntity delete(@PathVariable long id) {
-			patientService.delete(id);
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-			
+		patientService.delete(id);
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+
 	}
 }

@@ -18,11 +18,11 @@ public class PatientService {
 	PatientService(PatientRepository patientRepository) {
 		this.patientRepository = patientRepository;
 	}
-	
+
 	public List findAll() {
 		return patientRepository.findAll();
 	}
-	
+
 	public Optional<Patient> findById(long id) {
 		return patientRepository.findById(id);
 	}
@@ -30,29 +30,27 @@ public class PatientService {
 	public Patient create(Patient patient) {
 		return patientRepository.save(patient);
 	}
-	
+
 	public Patient update(long id, Patient patient) {
 		Optional<Patient> currentPatient = patientRepository.findById(id);
-		if(currentPatient.isPresent())
-		{
+		if (currentPatient.isPresent()) {
 			currentPatient.get().setName(patient.getName());
 			currentPatient.get().setCPF(patient.getCPF());
-			if(patient.getAppointments() != null) {
+			if (patient.getAppointments() != null) {
 				currentPatient.get().getAppointments().addAll(patient.getAppointments());
 			}
 			return patientRepository.save(currentPatient.get());
-		}else
-		{
-			throw new ResourceNotFoundException("Pacient", "Client", "O paciente com id:"+id+" não foi encontrado");
+		} else {
+			throw new ResourceNotFoundException("Pacient", "Client", "O paciente com id:" + id + " não foi encontrado");
 		}
-		
+
 	}
-	
+
 	public void delete(long id) {
 		try {
 			patientRepository.deleteById(id);
-		}catch (EmptyResultDataAccessException e) {
+		} catch (EmptyResultDataAccessException e) {
 		}
-		
-	}	
+
+	}
 }
