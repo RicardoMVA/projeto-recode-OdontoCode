@@ -34,17 +34,18 @@ public class PatientService {
 	public Patient update(long id, Patient patient) {
 		Optional<Patient> currentPatient = patientRepository.findById(id);
 		if (currentPatient.isPresent()) {
-			currentPatient.get().setName(patient.getName());
-			currentPatient.get().setCPF(patient.getCPF());
-			currentPatient.get().setPhone(patient.getPhone());
-			currentPatient.get().setBirthday(patient.getBirthday());
-			currentPatient.get().setGender(patient.getGender());
+			Patient oldPatient = currentPatient.get();
+			oldPatient.setName(patient.getName());
+			oldPatient.setCPF(patient.getCPF());
+			oldPatient.setPhone(patient.getPhone());
+			oldPatient.setBirthday(patient.getBirthday());
+			oldPatient.setGender(patient.getGender());
 			if (patient.getAppointments() != null) {
-				currentPatient.get().getAppointments().addAll(patient.getAppointments());
+				oldPatient.getAppointments().addAll(patient.getAppointments());
 			}
 			return patientRepository.save(currentPatient.get());
 		} else {
-			throw new ResourceNotFoundException("Pacient", "Client", "O paciente com id:" + id + " não foi encontrado");
+			throw new ResourceNotFoundException("Patient", "Id", "O paciente com id: " + id + " não foi encontrado");
 		}
 
 	}
