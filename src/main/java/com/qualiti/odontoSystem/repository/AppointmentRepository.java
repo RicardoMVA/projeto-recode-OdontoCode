@@ -1,5 +1,11 @@
 package com.qualiti.odontoSystem.repository;
 
-public interface AppointmentRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.qualiti.odontoSystem.model.Appointment;
+
+@Repository
+public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
 
 }

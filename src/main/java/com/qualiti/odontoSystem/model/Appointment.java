@@ -2,6 +2,7 @@ package com.qualiti.odontoSystem.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,35 +14,34 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Appointment {
-	
+
 	@Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
 	@JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "patient_id", nullable = false)
-    private Patient patient;
-	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "patient_id", nullable = false)
+	private Patient patient;
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
-	
+
 	@Column
 	private int value;
-	
-	@Column 
+
+	@Column
 	private String specialty;
-	
+
 	@Column
 	private boolean remarked;
-	
-	public Appointment () {
-		
+
+	public Appointment() {
+
 	}
 
 	public Long getId() {
@@ -92,5 +92,4 @@ public class Appointment {
 		this.remarked = remarked;
 	}
 
-	
 }
