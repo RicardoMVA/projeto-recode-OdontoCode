@@ -55,6 +55,5 @@ public class PatientService {
 			patientRepository.deleteById(id);
 		} catch (EmptyResultDataAccessException e) {
 		}
-
 	}
 }
