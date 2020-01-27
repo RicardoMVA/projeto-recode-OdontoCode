@@ -1,5 +1,6 @@
 package com.qualiti.odontoSystem.model;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -28,8 +29,8 @@ public class Patient {
 	@Column(length = 11, nullable = false, unique = true)
 	private String phone;
 
-	@Column(length = 10, nullable = false, unique = true)
-	private String birthday;
+	@Column
+	private Date birthday;
 
 	@Enumerated
 	public Gender gender;
@@ -76,11 +77,11 @@ public class Patient {
 		this.phone = phone;
 	}
 
-	public String getBirthday() {
+	public Date getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(String birthday) {
+	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
 
