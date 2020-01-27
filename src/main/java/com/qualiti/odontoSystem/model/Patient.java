@@ -1,6 +1,5 @@
 package com.qualiti.odontoSystem.model;
 
-import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,8 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
 
 @Entity
 public class Patient {
@@ -30,8 +28,8 @@ public class Patient {
 	@Column(length = 11, nullable = false, unique = true)
 	private String phone;
 
-	@Temporal(TemporalType.DATE)
-	private Calendar birthday;
+	@Column(length = 10, nullable = false, unique = true)
+	private String birthday;
 
 	@Enumerated
 	public Gender gender;
@@ -78,11 +76,11 @@ public class Patient {
 		this.phone = phone;
 	}
 
-	public Calendar getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(Calendar birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 
