@@ -21,7 +21,7 @@ body,
 height: 55px;
 width: 100px;
 display: block;
-background: url('imagens/OrtoCare-logo22.png') no-repeat;
+background: url('imagens/gol5.png') no-repeat;
 background-size: contain;
 color: transparent;
 }
@@ -134,6 +134,7 @@ color: white;
 
     .color-font{
         color: white;
+        
     }
 
      /* section */
@@ -197,7 +198,7 @@ color: white;
         padding-right: 50px;
     }
 
-
+   
 
 
   
