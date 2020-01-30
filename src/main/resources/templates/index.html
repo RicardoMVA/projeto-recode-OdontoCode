@@ -1,23 +1,176 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8" />
-  <link href="css/styles.css" rel="stylesheet"/>
-  <title>Odonto System</title>
-</head>
+<html lang="pt-br">
+  <head>
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OrtoCare</title>
+    <link rel="icon" href="images/icone.jpg">
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" >
+    <link href="css/estilo.css" rel="stylesheet" >
 
-<body>
-  <h1>Odonto System</h1>
+  </head>
+  <body class="home">
 
-  <a href="/index">Home</a>
-  <a href="/servicos">Serviços</a>
-  <a href="/contato">Contato</a>
-  <a href="/agendar">Agendar Consulta</a>
+  <nav class="navbar navbar-fixed-top navbar-inverse navbar-transparente">
+  <div class="container">
+    
+  <!-- header -->
+  <div class="navbar-header">
 
-  <p id="index">Index</p>
+   <!-- button toggle -->
+   <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#barra-navegacao">
+   <span class="icon-bar"></span>
+   <span class="icon-bar"></span>
+   <span class="icon-bar"></span>
+   </button>
+  <a href="index.html" class="navbar-brand">
+  <span class="img-logo">OrtoCare</span>
+  </a>
+  </div>
+  <!-- navbar -->
+    <div class="collapse navbar-collapse" id="barra-navegacao">
+    <ul class="nav navbar-nav navbar-right">
+    <li><a href="">Página Inicial</a></li>
+    <li><a href="">Sobre Nós</a></li>
+    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Tratamentos<span class="caret"></a>
+    <ul class="dropdown-menu">
+    <li><a href="#">Clínico Geral</a></li>
+  <li><a href="#">Ortodontia</a></li>
+  <li><a href="#">Implantodontia</a></li>
+  <li><a href="#">Harmonização Facial</a></li>
+  <li><a href="#">Odontopediatria</a></li>
+  <li><a href="#">Endodontia</a></li>
+  <li><a href="#">Estética</a></li>
+  <li><a href="#">Cirurgia Buco Maxilo Facial</a></li>
+  <li><a href="#">Prótese</a></li>
+  <li><a href="#">Periodontia</a></li>
+     </ul>
+    </li>
+    <li><a href="contato.html">Contato</a></li>
+    <li><a href="">Galeria</a></li>
+    </ul>
+    </div>
+    </nav>
+<div class="cover">
+<div class="text-cover">
+<h1>Por causa do seu sorriso
+você torna a vida mais bonita.</h1>
+<a href="Agendar.html" class="btn btn-custom btn-azul btn-lg">Agendar Consulta</a>
+</div>
+</div>
 
-  <dl id=results></dl>
+<!-- conteúdo -->
+  <section id="service">
+  <div class="container">
+  <div class="row">
+  <!-- albúm -->
+  <div class="col-sm-6">
+   <div class="row albuns">
+   <div class="col-md-6">
+   <img src="images/clinica1.jpg" class="img-responsive">
+       </div>
+    <div class="col-md-6">
+   <img src="images/clinica.jpg" class="img-responsive">
+   </div>
+     </div> <!-- fim row -->
+       <div class="row albuns">
+   <div class="col-md-6">
+   <img src="images/drLisiane.jpg" class="img-responsive">
+   <h3>Dra. Lisiane Lima</h3>
+   <p>CRO-PE 10702</p>
+       </div>
+    <div class="col-md-6">
+   <img src="images/drRhaquel.jpg" class="img-responsive">
+    <h3>Dra. Rhaquel Campêlo</h3>
+   <p>CRO-PE 11453</p>
+   </div>
+     </div> <!-- fim row -->
+  </div>
 
-  <script type="text/javascript" src="js/script.js"></script>
-</body>
+  <!-- serviços -->
+   <div class="col-sm-6">
+  <h2>OrtoCare - Clínica especializada</h2>
+  <h3>A clínica</h3>
+  <p>Atendemos em um consultório com ambiente aconchegante, proporcionando um melhor acolhimento dos pacientes. Nosso objetivo é viabilizar o melhor tratamento para cada paciente. Proporcionamos o tratamento odontológico a toda população de forma acessível e justa, tornando a ida ao dentista não uma obrigação e sim parte do cotidiano.</p>
+  <p>A clínica <b>OrtoCare</b> é constituída por profissionais médicos altamente capacitados, com formação e especialização na área da ortopedia e traumatologia. Desde a recepção até as salas de atendimento.</p> 
+   <h3>Corpo Clínico</h3>
+  <p>Todos os profissionais são experientes, com anos de experiência na odontologia. Todos qualificados para realizar o seu tratamento da melhor maneira </p>
+  </div>
+  </div>
+</div>
+</section>
+
+<section id="testimony">
+<div class="container">
+ <div class="row">
+
+ <!-- depoimentos -->
+  <div class="col-sm-12">
+   <div class="row">
+   <h2>Veja os depoimentos dos nossos clientes</h2>
+   <div class="col-md-4">
+   <img src="images/dep1.jpg" class="img-responsive">
+    </div>
+    <div class="col-md-4">
+   <img src="images/dep2.jpg" class="img-responsive">
+    </div>
+     <div class="col-md-4">
+   <img src="images/dep3.jpg" class="img-responsive">
+    </div>
+     
+     
+   
+</div><!-- fim row -->
+</div>
+</section>
+  
+ <!-- rodape -->
+<footer id="rodape">
+<div class="container">
+<div class="row">
+
+<div class="col-md-2">
+<span class="img-logo">OdontoCare</span>
+</div>
+<div class="col-md-2">
+<h4>Responsável Técnico</h4>
+<ul class="nav">
+<li><a href="#">Dra Lisiane Lima CRO-PE 10792</a></li>
+</ul>
+</div>
+<div class="col-md-2">
+<h4>Contato</h4>
+<ul class="nav">
+<li class="contact"><a href="#">(81) 3274 0175</a></li>
+<img class="fone img-responsive" src="images/fone.png">
+<li class="contact"><a href="#">(81) 8626 9977</a></li>
+<img class="whatsapp img-responsive" src="images/whatsapp.png">
+</ul>
+</div>
+<div class="col-md-2">
+<h4>Atendimento</h4>
+<ul class="nav">
+<li><a href="#">Segunda - Sexta: 08h às 18h</a></li>
+</ul>
+</div>
+<div class="col-md-4">
+<ul class="nav">
+<li class="social-network"><a href="#"><img src="images/facebook.png" class="img-responsive"></a></li>
+<li class="social-network"><a href="#"><img src="images/twitter.png" class="img-responsive"></a></li>
+<li class="social-network"><a href="#"><img src="images/instagram.png" class="img-responsive"></a></li>
+</div>
+</div><!-- fim da row -->
+</div>
+</footer>
+  
+     
+  <!-- JavaScript (Opcional) -->
+  <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+    <script src="js/jquery-3.4.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+     
+  </body>
 </html>
