@@ -43,8 +43,22 @@ public class PatientController {
 	}
 
 	@PostMapping
-	public Patient create(@RequestBody Patient patient) {
-		return patientService.create(patient);
+	public ResponseEntity create(@RequestBody Patient patient) {
+		int createPatient = patientService.create(patient);
+		if (createPatient == 0) {
+			return ResponseEntity.ok().body("Usuário " + patient.getName() + " foi criado com sucesso!");
+		} else if (createPatient == 1) {
+			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
+					.body("O CPF e/ou telefone fornecido(s) já existe(m).");
+		} else if (createPatient == 2) {
+			return ResponseEntity.badRequest().body("O nome preenchido contém caracteres inválidos.");
+		} else if (createPatient == 3) {
+			return ResponseEntity.badRequest().body("CPF inválido.");
+		} else if (createPatient == 4) {
+			return ResponseEntity.badRequest().body("Telefone inválido.");
+		} else {
+			return ResponseEntity.badRequest().build();
+		}
 	}
 
 	@PutMapping(value = "/{id}")
