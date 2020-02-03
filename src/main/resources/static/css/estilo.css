@@ -121,18 +121,24 @@ footer {
 
 .social-network {
   float: right;
+  margin-right: 20px;
+}
+
+.social-nav {
+  margin-left: 80px;
 }
 
 .contact {
   float: right;
+  margin-top: 10px;
 }
 
 .whatsapp {
-  margin-top: 22px;
+  margin-right: 5px;
 }
 
 .fone {
-  margin-top: 8px;
+  margin-right: 5px;
 }
 
 .scheduling {
@@ -141,6 +147,20 @@ footer {
 
 .r {
   padding-right: 50px;
+}
+
+.nav {
+  justify-content: center;
+}
+
+.footer-link {
+  color: #fff;
+  font-size: 0.8em;
+}
+
+.footer-link:hover {
+  color: #000;
+  text-decoration: none;
 }
 
 /*===================================*/
@@ -186,9 +206,20 @@ p {
   margin-top: 20px;
 }
 
+@media (max-width:1200px) {
+  .social-nav {
+    margin-left: 30px;
+  }
+
+}
+
 @media (max-width:992px) {
   .navbar.navbar-expand-md.navbar-dark {
     margin: 0 3em;
+  }
+
+  .social-nav {
+    margin-left: 0px;
   }
 
 }
@@ -196,6 +227,10 @@ p {
 @media (max-width:768px) {
   .navbar.navbar-expand-md.navbar-dark {
     margin: 0 2em;
+  }
+
+  .contact {
+    margin: 10px;
   }
 
 }
