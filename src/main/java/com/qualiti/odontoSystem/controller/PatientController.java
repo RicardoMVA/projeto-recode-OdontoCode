@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.qualiti.odontoSystem.exception.InvalidFormDataException;
+import com.qualiti.odontoSystem.exception.ResourceNotFoundException;
 import com.qualiti.odontoSystem.model.Patient;
 import com.qualiti.odontoSystem.service.PatientService;
 
@@ -44,20 +46,11 @@ public class PatientController {
 
 	@PostMapping
 	public ResponseEntity create(@RequestBody Patient patient) {
-		int createPatient = patientService.create(patient);
-		if (createPatient == 0) {
-			return ResponseEntity.ok().body("Usuário " + patient.getName() + " foi criado com sucesso!");
-		} else if (createPatient == 1) {
-			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
-					.body("O CPF e/ou telefone fornecido(s) já existe(m).");
-		} else if (createPatient == 2) {
-			return ResponseEntity.badRequest().body("O nome preenchido contém caracteres inválidos.");
-		} else if (createPatient == 3) {
-			return ResponseEntity.badRequest().body("CPF inválido.");
-		} else if (createPatient == 4) {
-			return ResponseEntity.badRequest().body("Telefone inválido.");
-		} else {
-			return ResponseEntity.badRequest().build();
+		try {
+			Patient createPatient = patientService.create(patient);
+			return ResponseEntity.ok().body(patient);
+		} catch (InvalidFormDataException e) {
+			return ResponseEntity.badRequest().body(e.getErrorMsg());
 		}
 	}
 

@@ -9,6 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.qualiti.odontoSystem.exception.InvalidFormDataException;
 import com.qualiti.odontoSystem.exception.ResourceNotFoundException;
 import com.qualiti.odontoSystem.model.Patient;
 import com.qualiti.odontoSystem.repository.PatientRepository;
@@ -34,24 +35,23 @@ public class PatientService {
 		return patientRepository.findById(id);
 	}
 
-	public int create(Patient patient) {
+	public Patient create(Patient patient) throws InvalidFormDataException {
 		Matcher checkName = namePattern.matcher(patient.getName());
 		Matcher checkCPF = numberPattern.matcher(patient.getCPF());
 		Matcher checkPhone = numberPattern.matcher(patient.getPhone());
 
-		if (checkName.matches() == false) {
-			return 2;
+		if (!checkName.matches()) {
+			throw new InvalidFormDataException("O nome preenchido contém caracteres inválidos.");
 		} else if (checkCPF.matches() == false || patient.getCPF().length() != 11 || patient.getCPF() == null) {
-			return 3;
+			throw new InvalidFormDataException("CPF inválido.");
 		} else if (checkPhone.matches() == false || patient.getPhone().length() < 10 || patient.getPhone().length() > 11
 				|| patient.getPhone() == null) {
-			return 4;
+			throw new InvalidFormDataException("Telefone inválido.");
 		} else {
 			try {
-				patientRepository.save(patient);
-				return 0;
+				return patientRepository.save(patient);
 			} catch (DataIntegrityViolationException e) {
-				return 1;
+				throw new InvalidFormDataException("CPF e/ou telefone já cadastrado(s).");
 			}
 		}
 	}
@@ -69,10 +69,8 @@ public class PatientService {
 				oldPatient.getAppointments().addAll(patient.getAppointments());
 			}
 			return patientRepository.save(currentPatient.get());
-		} else {
-			throw new ResourceNotFoundException("Patient", "Id", "O paciente com id: " + id + " não foi encontrado");
 		}
-
+		return null;
 	}
 
 	public void delete(long id) {
