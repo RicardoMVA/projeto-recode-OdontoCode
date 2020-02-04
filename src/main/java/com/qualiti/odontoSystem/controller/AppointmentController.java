@@ -3,7 +3,6 @@ package com.qualiti.odontoSystem.controller;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qualiti.odontoSystem.model.Appointment;
-import com.qualiti.odontoSystem.model.Patient;
 import com.qualiti.odontoSystem.service.AppointmentService;
 
 @RestController()
@@ -36,7 +34,7 @@ public class AppointmentController {
 	}
 
 	@GetMapping(path = { "/patients/{patientId}/appointments/{id}" })
-	public ResponseEntity findById(@PathVariable long id) {
+	public ResponseEntity<?> findById(@PathVariable long id) {
 		Optional<Appointment> appointment = appointmentService.findById(id);
 		if (appointment.isPresent()) {
 			return ResponseEntity.ok().body(appointment);
@@ -46,7 +44,7 @@ public class AppointmentController {
 	}
 
 	@PostMapping(path = { "/patients/{patientId}/appointments" })
-	public ResponseEntity create(@PathVariable(value = "patientId") Long patientId,
+	public ResponseEntity<?> create(@PathVariable(value = "patientId") Long patientId,
 			@RequestBody Appointment appointment) {
 		Appointment createAppointment = appointmentService.create(patientId, appointment);
 		if (createAppointment == null) {
@@ -58,7 +56,7 @@ public class AppointmentController {
 	}
 
 	@PutMapping(path = { "/patients/{patientId}/appointments/{id}" })
-	public ResponseEntity update(@PathVariable("patientId") long patientId, @PathVariable("id") long id,
+	public ResponseEntity<?> update(@PathVariable("patientId") long patientId, @PathVariable("id") long id,
 			@RequestBody Appointment appointment) {
 		Appointment updateAppointment = appointmentService.update(patientId, id, appointment);
 		if (updateAppointment == null) {
@@ -69,7 +67,7 @@ public class AppointmentController {
 	}
 
 	@DeleteMapping(path = { "/patients/{patientId}/appointments/{id}" })
-	public ResponseEntity delete(@PathVariable("patientId") long patientId, @PathVariable("id") long id) {
+	public ResponseEntity<?> delete(@PathVariable("patientId") long patientId, @PathVariable("id") long id) {
 		appointmentService.delete(patientId, id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}

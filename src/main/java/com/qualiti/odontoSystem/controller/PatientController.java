@@ -36,7 +36,7 @@ public class PatientController {
 	}
 
 	@GetMapping(path = { "/{id}" })
-	public ResponseEntity findById(@PathVariable long id) {
+	public ResponseEntity<?> findById(@PathVariable long id) {
 		Optional<Patient> patient = patientService.findById(id);
 		if (patient.isPresent()) {
 			return ResponseEntity.ok().body(patient);
@@ -46,9 +46,9 @@ public class PatientController {
 	}
 
 	@PostMapping
-	public ResponseEntity create(@RequestBody Patient patient) {
+	public ResponseEntity<?> create(@RequestBody Patient patient) {
 		try {
-			Patient createPatient = patientService.create(patient);
+			patientService.create(patient);
 			return ResponseEntity.ok().body(patient);
 		} catch (DuplicateDataException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
@@ -56,7 +56,7 @@ public class PatientController {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity update(@PathVariable("id") long id, @RequestBody Patient patient) {
+	public ResponseEntity<?> update(@PathVariable("id") long id, @RequestBody Patient patient) {
 		Patient updatedPatient = patientService.update(id, patient);
 		if (updatedPatient == null) {
 			return ResponseEntity.notFound().build();
@@ -66,7 +66,7 @@ public class PatientController {
 	}
 
 	@DeleteMapping(path = { "/{id}" })
-	public ResponseEntity delete(@PathVariable long id) {
+	public ResponseEntity<?> delete(@PathVariable long id) {
 		patientService.delete(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 
