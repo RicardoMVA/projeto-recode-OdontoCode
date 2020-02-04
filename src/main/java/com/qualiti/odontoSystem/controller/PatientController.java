@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.qualiti.odontoSystem.exception.InvalidFormDataException;
-import com.qualiti.odontoSystem.exception.ResourceNotFoundException;
+import com.qualiti.odontoSystem.exception.DuplicateDataException;
 import com.qualiti.odontoSystem.model.Patient;
 import com.qualiti.odontoSystem.service.PatientService;
 
 @RestController()
 @RequestMapping("/api/v1/patients")
+@Validated
 public class PatientController {
 
 	private PatientService patientService;
@@ -49,8 +50,8 @@ public class PatientController {
 		try {
 			Patient createPatient = patientService.create(patient);
 			return ResponseEntity.ok().body(patient);
-		} catch (InvalidFormDataException e) {
-			return ResponseEntity.badRequest().body(e.getErrorMsg());
+		} catch (DuplicateDataException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
 

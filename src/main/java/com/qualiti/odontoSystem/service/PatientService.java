@@ -2,15 +2,12 @@ package com.qualiti.odontoSystem.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.qualiti.odontoSystem.exception.InvalidFormDataException;
-import com.qualiti.odontoSystem.exception.ResourceNotFoundException;
+import com.qualiti.odontoSystem.exception.DuplicateDataException;
 import com.qualiti.odontoSystem.model.Patient;
 import com.qualiti.odontoSystem.repository.PatientRepository;
 
@@ -18,10 +15,6 @@ import com.qualiti.odontoSystem.repository.PatientRepository;
 public class PatientService {
 
 	private PatientRepository patientRepository;
-//	blocks all numbers and non-latin characters
-	Pattern namePattern = Pattern.compile("[^0-9]*[^\\P{L}]*");
-//	only allows numbers
-	Pattern numberPattern = Pattern.compile("[0-9]*");
 
 	PatientService(PatientRepository patientRepository) {
 		this.patientRepository = patientRepository;
@@ -35,24 +28,12 @@ public class PatientService {
 		return patientRepository.findById(id);
 	}
 
-	public Patient create(Patient patient) throws InvalidFormDataException {
-		Matcher checkName = namePattern.matcher(patient.getName());
-		Matcher checkCPF = numberPattern.matcher(patient.getCPF());
-		Matcher checkPhone = numberPattern.matcher(patient.getPhone());
+	public Patient create(Patient patient) throws DuplicateDataException {
 
-		if (!checkName.matches()) {
-			throw new InvalidFormDataException("O nome preenchido contém caracteres inválidos.");
-		} else if (checkCPF.matches() == false || patient.getCPF().length() != 11 || patient.getCPF() == null) {
-			throw new InvalidFormDataException("CPF inválido.");
-		} else if (checkPhone.matches() == false || patient.getPhone().length() < 10 || patient.getPhone().length() > 11
-				|| patient.getPhone() == null) {
-			throw new InvalidFormDataException("Telefone inválido.");
-		} else {
-			try {
-				return patientRepository.save(patient);
-			} catch (DataIntegrityViolationException e) {
-				throw new InvalidFormDataException("CPF e/ou telefone já cadastrado(s).");
-			}
+		try {
+			return patientRepository.save(patient);
+		} catch (DataIntegrityViolationException e) {
+			throw new DuplicateDataException("CPF e/ou telefone já cadastrado(s).");
 		}
 	}
 
@@ -61,7 +42,7 @@ public class PatientService {
 		if (currentPatient.isPresent()) {
 			Patient oldPatient = currentPatient.get();
 			oldPatient.setName(patient.getName());
-			oldPatient.setCPF(patient.getCPF());
+			oldPatient.setCpf(patient.getCpf());
 			oldPatient.setPhone(patient.getPhone());
 			oldPatient.setBirthday(patient.getBirthday());
 			oldPatient.setGender(patient.getGender());
