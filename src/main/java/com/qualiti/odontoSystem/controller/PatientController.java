@@ -31,7 +31,7 @@ public class PatientController {
 	}
 
 	@GetMapping
-	public List findAll() {
+	public List<?> findAll() {
 		return patientService.findAll();
 	}
 

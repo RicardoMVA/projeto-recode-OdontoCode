@@ -17,6 +17,7 @@ import com.qualiti.odontoSystem.repository.PatientRepository;
 public class AppointmentService {
 
 	private AppointmentRepository appointmentRepository;
+	
 	@Autowired
 	private PatientRepository patientRepository;
 
@@ -24,7 +25,7 @@ public class AppointmentService {
 		this.appointmentRepository = appointmentRepository;
 	}
 
-	public List findAll() {
+	public List<?> findAll() {
 		return appointmentRepository.findAll();
 	}
 

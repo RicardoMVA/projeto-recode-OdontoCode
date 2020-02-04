@@ -29,7 +29,7 @@ public class AppointmentController {
 	}
 
 	@GetMapping(path = "/appointments")
-	public List findAll() {
+	public List<?> findAll() {
 		return appointmentService.findAll();
 	}
 

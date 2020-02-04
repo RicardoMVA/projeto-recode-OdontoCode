@@ -20,7 +20,7 @@ public class PatientService {
 		this.patientRepository = patientRepository;
 	}
 
-	public List findAll() {
+	public List<?> findAll() {
 		return patientRepository.findAll();
 	}
 
