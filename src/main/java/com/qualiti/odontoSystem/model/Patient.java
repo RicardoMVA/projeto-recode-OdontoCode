@@ -12,6 +12,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -19,24 +23,38 @@ public class Patient {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
+	@NotNull(message = "É necessário preencher o nome.")
+	@NotEmpty(message = "É necessário preencher o nome.")
+//	blocks all numbers and non-latin characters
+	@Pattern(regexp = "[^0-9]*[^\\P{L}]*", message = "O nome preenchido contém caracteres inválidos.")
 	@Column
 	private String name;
-
+	
+	@NotNull(message = "É necessário preencher o CPF.")
+	@NotEmpty(message = "É necessário preencher o CPF.")
+	@Size(min = 11, max = 11, message = "CPF inválido.")
+//	blocks all except numbers
+	@Pattern(regexp = "[0-9]*", message = "CPF inválido.")
 	@Column(length = 11, nullable = false, unique = true)
-	private String CPF;
-
+	private String cpf;
+	
+	@NotNull(message = "É necessário preencher o telefone.")
+	@NotEmpty(message = "É necessário preencher o telefone.")
+	@Size(min = 10, max = 11, message = "Telefone inválido.")
+//	blocks all except numbers
+	@Pattern(regexp = "[0-9]*", message = "Telefone inválido.")
 	@Column(length = 11, nullable = false, unique = true)
 	private String phone;
-
+	
 	@Column
 	private Date birthday;
-
+	
 	@Enumerated
 	public Gender gender;
 
 	public static enum Gender {
-		MALE, FEMALE
+		MALE, FEMALE, OTHER
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "patient")
@@ -61,12 +79,12 @@ public class Patient {
 		this.name = name;
 	}
 
-	public String getCPF() {
-		return CPF;
+	public String getCpf() {
+		return cpf;
 	}
 
-	public void setCPF(String cPF) {
-		CPF = cPF;
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	public String getPhone() {

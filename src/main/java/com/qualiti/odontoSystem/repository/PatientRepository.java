@@ -11,5 +11,5 @@ import com.qualiti.odontoSystem.model.Patient;
 public interface PatientRepository extends JpaRepository<Patient, Long> {
 	List<Patient> findByNameContaining(String name);
 
-	List<Patient> findByCPFContaining(String CPF);
+	List<Patient> findByCpfContaining(String Cpf);
 }
