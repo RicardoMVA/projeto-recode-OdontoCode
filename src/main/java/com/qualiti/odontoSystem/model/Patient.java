@@ -17,39 +17,38 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-
 @Entity
 public class Patient {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@NotNull(message = "É necessário preencher o nome.")
-	@NotEmpty(message = "É necessário preencher o nome.")
+
+	@NotNull(message = "O nome não pode ser nulo.")
+	@NotEmpty(message = "É necessário preencher um nome.")
 //	blocks all numbers and non-latin characters
 	@Pattern(regexp = "[^0-9]*[^\\P{L}]*", message = "O nome preenchido contém caracteres inválidos.")
 	@Column
 	private String name;
-	
-	@NotNull(message = "É necessário preencher o CPF.")
+
+	@NotNull(message = "O CPF não pode ser nulo.")
 	@NotEmpty(message = "É necessário preencher o CPF.")
-	@Size(min = 11, max = 11, message = "CPF inválido.")
+	@Size(min = 11, max = 11, message = "CPF com tamanho inválido.")
 //	blocks all except numbers
-	@Pattern(regexp = "[0-9]*", message = "CPF inválido.")
+	@Pattern(regexp = "[0-9]*", message = "CPF com caractere(s) inválido(s).")
 	@Column(length = 11, nullable = false, unique = true)
 	private String cpf;
-	
-	@NotNull(message = "É necessário preencher o telefone.")
+
+	@NotNull(message = "O telefone não pode ser nulo.")
 	@NotEmpty(message = "É necessário preencher o telefone.")
-	@Size(min = 10, max = 11, message = "Telefone inválido.")
+	@Size(min = 10, max = 11, message = "Telefone com tamanho inválido.")
 //	blocks all except numbers
-	@Pattern(regexp = "[0-9]*", message = "Telefone inválido.")
+	@Pattern(regexp = "[0-9]*", message = "Telefone com caractere(s) inválido(s).")
 	@Column(length = 11, nullable = false, unique = true)
 	private String phone;
-	
+
 	@Column
 	private Date birthday;
-	
+
 	@Enumerated
 	public Gender gender;
 
