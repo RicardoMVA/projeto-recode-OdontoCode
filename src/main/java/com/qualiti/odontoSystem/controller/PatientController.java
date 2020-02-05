@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.qualiti.odontoSystem.exception.DuplicateDataException;
 import com.qualiti.odontoSystem.model.Patient;
 import com.qualiti.odontoSystem.service.PatientService;
 
@@ -47,12 +46,8 @@ public class PatientController {
 
 	@PostMapping
 	public ResponseEntity<?> create(@RequestBody Patient patient) {
-		try {
-			patientService.create(patient);
-			return ResponseEntity.ok().body(patient);
-		} catch (DuplicateDataException e) {
-			return ResponseEntity.badRequest().body(e.getMessage());
-		}
+		patientService.create(patient);
+		return ResponseEntity.ok().body(patient);
 	}
 
 	@PutMapping(value = "/{id}")

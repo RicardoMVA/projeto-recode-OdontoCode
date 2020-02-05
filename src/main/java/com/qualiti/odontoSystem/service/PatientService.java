@@ -7,7 +7,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.qualiti.odontoSystem.exception.DuplicateDataException;
 import com.qualiti.odontoSystem.model.Patient;
 import com.qualiti.odontoSystem.repository.PatientRepository;
 
@@ -28,12 +27,11 @@ public class PatientService {
 		return patientRepository.findById(id);
 	}
 
-	public Patient create(Patient patient) throws DuplicateDataException {
-
+	public Patient create(Patient patient) throws DataIntegrityViolationException {
 		try {
 			return patientRepository.save(patient);
 		} catch (DataIntegrityViolationException e) {
-			throw new DuplicateDataException("CPF e/ou telefone já cadastrado(s).");
+			throw new DataIntegrityViolationException("CPF e/ou telefone já cadastrado(s).");
 		}
 	}
 
