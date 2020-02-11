@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.qualiti.odontoSystem.exception.DuplicateDataException;
 import com.qualiti.odontoSystem.model.Appointment;
 import com.qualiti.odontoSystem.service.AppointmentService;
 
 @RestController()
 @RequestMapping("/api/v1")
+@Validated
 
 public class AppointmentController {
 
@@ -46,14 +49,21 @@ public class AppointmentController {
 	@PostMapping(path = { "/patients/{patientId}/appointments" })
 	public ResponseEntity<?> create(@PathVariable(value = "patientId") Long patientId,
 			@RequestBody Appointment appointment) {
-		Appointment createAppointment = appointmentService.create(patientId, appointment);
-		if (createAppointment == null) {
-
-			return ResponseEntity.notFound().build();
-		} else {
+		try {
+			Appointment createAppointment = appointmentService.create(patientId, appointment);
 			return ResponseEntity.ok().body(appointment);
+		} catch (DuplicateDataException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
+//		Appointment createAppointment = appointmentService.create(patientId, appointment);
+//		if (createAppointment == null) {
+//
+//			return ResponseEntity.notFound().build();
+//		} else {
+//			return ResponseEntity.ok().body(appointment);
+//		}
+//	}
 
 	@PutMapping(path = { "/patients/{patientId}/appointments/{id}" })
 	public ResponseEntity<?> update(@PathVariable("patientId") long patientId, @PathVariable("id") long id,
